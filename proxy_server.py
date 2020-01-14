@@ -35,14 +35,14 @@ def main():
 
                 proxy_end.connect((remoteIP, port))
 
-                sendFullData = conn.recv(BUFFER_SIZE)
-                print(f"Sending received data {sendFullData} to Google")
-                proxy_end.sendall(sendFullData)
+                receivedClientData = conn.recv(BUFFER_SIZE)
+                print(f"Sending received data {receivedClientData} to Google")
+                proxy_end.sendall(receivedClientData)
                 proxy_end.shutdown(socket.SHUT_WR)
 
-                data = proxy_end.recv(BUFFER_SIZE)
-                print(f"Sending received data {data} to client")
-                conn.send(data)
+                googleData = proxy_end.recv(BUFFER_SIZE)
+                print(f"Sending received data {googleData} to client")
+                conn.send(googleData)
 
             conn.close()
 
