@@ -34,7 +34,7 @@ def main():
     try:
         HOST = "www.google.com"
         PORT = 80
-        PAYLOAD = b"GET / HTTP/1.0\r\nHost: " + HOST + "\r\n\r\n"
+        PAYLOAD = "GET / HTTP/1.0\r\nHost: " + HOST + "\r\n\r\n"
         BUFFER_SIZE = 4096
 
         s = createTCPSocket()
@@ -46,19 +46,20 @@ def main():
         sendData(s, PAYLOAD)
         s.shutdown(socket.SHUT_WR)
 
-        # fullData = b""
-        while():
+        fullData = b""
+        while(True):
             data = s.recv(BUFFER_SIZE)
 
             if not data:
                 break
-            
-            print("> Sockets - Step 2")
-            print(data)
+            fullData += data
+
+        print("\n> Sockets - Step 2")
+        print(fullData)
     except Exception as e:
         print(e)
-    # finally:
-    #     s.close()
+    finally:
+        s.close()
 
 if __name__ == "__main__":
     main()
